@@ -11,7 +11,7 @@ namespace Business.Abstract
 {
     public interface IParityService
     {
-        IDataResult<List<Crypto>> GetParities();
+        IDataResult<List<CryptoDto>> GetParities();
         Task<IDataResult<Parity>> GetPrice(int id);
     }
 }

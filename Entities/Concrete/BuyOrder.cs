@@ -29,13 +29,15 @@ namespace Entities.Concrete
         [Column(TypeName = "decimal(18,8)")]
         public decimal CommissionFee { get; set; }
 
+        [Column(TypeName = "decimal(18,8)")]
+        public decimal Remaining { get; set; }
+
         [Range(0, 9999999999.99999999, ErrorMessage = "Geçersiz Değer")]
         [Column(TypeName = "decimal(18,8)")]
         public decimal Collected { get; set; }
 
         [Column(TypeName = "decimal(18,8)")]
         public decimal Amount { get; set; }
-        public string Type { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }

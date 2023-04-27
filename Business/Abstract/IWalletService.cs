@@ -1,4 +1,6 @@
 ﻿using Core.Utilities.Results;
+using Entities.Concrete;
+using Entities.Dtos;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,12 @@ namespace Business.Abstract
 {
     public interface IWalletService
     {
-        IResult Deposit(decimal money);
-        IResult Withdraw(decimal money);
+        IDataResult<WalletDto> Deposit(Deposit deposit);
+        IDataResult<List<WalletDto>> GetWallets();
+        //IResult Withdraw(Deposit deposit);
+
+        IDataResult<List<Wallet>> GetListByUserId(int userId);
+
+        void Update(Wallet wallet);
     }
 }

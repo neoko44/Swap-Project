@@ -32,8 +32,9 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<OrderManager>().As<IOrderService>();
             builder.RegisterType<EfBuyOrderDal>().As<IBuyOrderDal>();
+            builder.RegisterType<EfSellOrderDal>().As<ISellOrderDal>();
 
-            
+
 
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();

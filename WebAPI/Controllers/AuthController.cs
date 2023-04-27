@@ -1,6 +1,7 @@
 ﻿
 using Business.Abstract;
 using Core.Utilities.Security.Jwt;
+using Entities.Concrete;
 using Entities.Dtos;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,14 +15,10 @@ namespace WebAPI.Controllers
     public class AuthController : ControllerBase
     {
         IAuthService _authService;
-        IWalletService _walletService;
-
-        public AuthController(IAuthService authService, IWalletService walletService)
+        public AuthController(IAuthService authService)
         {
             _authService = authService;
-            _walletService = walletService;
         }
-
 
 
         [HttpPost("register")]
@@ -32,7 +29,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("login/mail")]
+        [HttpPost("login")]
         public IActionResult LoginMail(EmailLoginDto emailLoginDto)
         {
             var userToLogin = _authService.LoginMail(emailLoginDto.Email, emailLoginDto.Password);
@@ -46,7 +43,7 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("update/password")]
+        [HttpPost("updatepassword")]
         public IActionResult ChangePassword(ChangePasswordDto changePasswordDto)
         {
             var result = _authService.ChangePassword(changePasswordDto);
@@ -55,12 +52,19 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpPost("deposit/balance")]
-        public IActionResult DepositBalance(decimal money)
-        {
-            var result = _walletService.Deposit(money);
-            return Ok(result);
-        }
+
+
+        //[HttpPost("withdraw")]
+        //public IActionResult WithdrawBalance(Deposit deposit)
+        //{
+        //    var result = _walletService.Withdraw(deposit);
+
+        //    if (!result.Success)
+        //    {
+        //        return BadRequest(result.Message);
+        //    }
+        //    return Ok(result.);
+        //}
 
     }
 }

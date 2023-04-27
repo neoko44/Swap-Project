@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Dtos
 {
-    public class BuyCryptoDto:IDto
+    public class SellCryptoDto:IDto
     {
         public int Id { get; set; }
 

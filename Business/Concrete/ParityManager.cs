@@ -19,27 +19,23 @@ namespace Business.Concrete
 {
     public class ParityManager : IParityService
     {
-        ITokenHelper _tokenHelper;
-        IUserDal _userDal;
         ICryptoDal _cryptoDal;
 
-        public ParityManager(ITokenHelper tokenHelper, IUserDal userDal, ICryptoDal cryptoDal)
+        public ParityManager(ICryptoDal cryptoDal)
         {
-            _tokenHelper = tokenHelper;
-            _userDal = userDal;
             _cryptoDal = cryptoDal;
         }
 
         public async Task<IDataResult<Parity>> GetPrice(int id)
         {
-            if (id==0||id<0)
+            if (id == 0 || id < 0)
             {
                 return new ErrorDataResult<Parity>(Messages.IdInvalid);
             }
             var getName = _cryptoDal.Get(p => p.Id == id);
             if (getName == null)
             {
-                return new ErrorDataResult<Parity>(Messages.ParityNotFound);
+                return new ErrorDataResult<Parity>(new Parity(), Messages.ParityNotFound);
             }
 
             var client = new HttpClient();
@@ -56,32 +52,30 @@ namespace Business.Concrete
                 }
             }
 
-            return new ErrorDataResult<Parity>(Messages.ParityNotFound);
+            return new ErrorDataResult<Parity>(new Parity(), Messages.ParityNotFound);
         }
 
-        public IDataResult<List<Crypto>> GetParities()
+        public IDataResult<List<CryptoDto>> GetParities()
         {
-            List<Crypto> list = new();
+            List<CryptoDto> list = new();
             var getList = _cryptoDal.GetList().ToList();
             if (getList.Count == 0)
             {
-                return new ErrorDataResult<List<Crypto>>(Messages.CryptoNotFound);
+                return new ErrorDataResult<List<CryptoDto>>(Messages.CryptoNotFound);
             }
 
 
             foreach (var item in getList)
             {
-                Crypto crypto = new()
+                CryptoDto crypto = new()
                 {
                     Id = item.Id,
                     Name = item.Name,
-                    Status = item.Status,
-                    Commission = item.Commission,
                 };
                 list.Add(crypto);
             }
 
-            return new SuccessDataResult<List<Crypto>>(list);
+            return new SuccessDataResult<List<CryptoDto>>(list);
         }
     }
 }

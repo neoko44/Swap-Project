@@ -1,5 +1,6 @@
 ﻿using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.Dtos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,24 @@ namespace Business.Constants
 
         public static string ValidValue = "Değer geçerli";
 
-        public static BuyOrder BuyOrdered { get; internal set; }
+        public static string BuyOrdered = "Alım emri oluşturuldu";
+        public static string BuyOrderUpdated = "Alım emri güncellendi";
+        public static string SellOrderUpdated = "Satış emri güncellendi";
+
+        public static string BuyOrderCompleted = "Alım emri tamamlandı";
+        public static string SellOrdered = "Satış emri oluşturuldu";
+
+        public static string SellOrderCompleted = "Satış emri tamamlandı";
+
+        public static string CompanyUsdtWalletNotFound = "Şirket USDT cüzdanı bulunamadı";
+
+        public static string InvalidAmount = "Yanlış miktar";
+        public static string InvalidPrice = "Yanlış fiyat";
+        public static string NoOrder = "Siparişiniz Yok";
+
+        public static string BuyOrderNotFound = "Alım emri bulunamadı";
+        public static string OrderCancelled = "Emir iptal edildi";
+
+        public static string SellOrderNotFound = "Satış emri bulunamadı";
     }
 }
